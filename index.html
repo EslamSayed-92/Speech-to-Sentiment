@@ -7,23 +7,38 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="styles.css">
 
     </head>
     <body>
         <div class="container">
 
-            <h1>Speech to Sentiment analysis App</h1>
+            <h1>Speech to Sentiment Analysis App</h1>
 
             <h3 class="no-browser-support">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo In Google Chrome.</h3>
 
-            <div class="app"> 
-                <div class="input-single">
+            <div class="app row"> 
+                <div class="input-single col-md-5">
                     <textarea id="note-textarea" placeholder="Start Speeking to Anlayze sentiment" rows="6"></textarea>
-                </div>         
-                <button id="start-record-btn" title="Start Recording">Start Recognition</button>
-                <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
-                <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
+
+                    <button id="start-record-btn" title="Start Recording">Start Recognition</button>
+                    <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
+                </div>
+
+                <div class="subject col-md-3">
+                    <h4><u>Most Probable Subjects</u></h4>
+                    <ul id="subjects">
+                    </ul>
+                </div>
+                <div class="sentiment col-md-3">
+                    <h1 id="result-sentiment" class="align-middle"></h1>
+                </div>
+
+                <div class="col-md-12">
+                    <p id= "recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
+                </div>
+
 
             </div>
 

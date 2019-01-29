@@ -1,7 +1,6 @@
 try {
   var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   var recognition = new SpeechRecognition();
-  console.log(recognition);
 }
 catch(e) {
   console.error(e);
@@ -24,7 +23,7 @@ var noteContent = '';
 // If false, the recording will stop after a few seconds of silence.
 // When true, the silence period is longer (about 15 seconds),
 // allowing us to keep recording even when the user pauses. 
-recognition.continuous = false;
+recognition.continuous = true;
 
 // This block is called every time the Speech APi captures a line. 
 recognition.onresult = function(event) {
@@ -45,6 +44,7 @@ recognition.onresult = function(event) {
   if(!mobileRepeatBug) {
     noteContent += transcript;
     noteTextarea.val(noteContent);
+
     $.ajax({
       url:"http://127.0.0.1:3000/",
       method:"POST",
@@ -52,7 +52,17 @@ recognition.onresult = function(event) {
       dataType: "json",
       data:{text:noteContent},
       success:function(res){
-        console.log(res);
+        $.each(res.words,function(i,e){$("#subjects").append("<li>"+e+"</li>");});
+        if(res.score == 0){
+          $("#result-sentiment").text("Moderate");
+          $(".sentiment").css("background-color","#ffff00");
+        }else if(res.score < 0){
+          $("#result-sentiment").text("Bad");
+          $(".sentiment").css("background-color","#"+scoreToColor(res.score)+"0044");
+        }else if(res.score > 0){
+          $("#result-sentiment").text("Good");
+          $(".sentiment").css("background-color","#00"+scoreToColor(res.score)+"44");
+        }
       }
     });
   }
@@ -112,4 +122,11 @@ function readOutLoud(message) {
 	speech.pitch = 1;
   
 	window.speechSynthesis.speak(speech);
+}
+
+function scoreToColor(number){
+  hexString = Math.abs(number).toString(16);
+  if (hexString.length % 2)
+    hexString = '0' + hexString;
+  return hexString;
 }

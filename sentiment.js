@@ -19,17 +19,21 @@ const server = http.createServer((req, res) => {
   let sentiment = new Sentiment();
 
   res.writeHead(200, { 
-        'Content-Type': 'text/plain',
-        'Access-Control-Allow-Origin': '*' // implementation of CORS
-    });  
+  	'Content-Type': 'text/plain',
+    'Access-Control-Allow-Origin': '*' // implementation of CORS
+  });
+
   req.on('data', chunk=> {
   	data += chunk;
   });
+
   req.on('end', ()=>{
+    data = data.substring((data.indexOf("=")+1),data.length);
   	result = sentiment.analyze(decodeURI(data));
   	util.log(result);
+  	res.end(JSON.stringify(result));
   });
-  res.end(JSON.stringify(data));
+  
   
 });
 

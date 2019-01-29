@@ -12,9 +12,9 @@ button:focus {
 }
 
 .container {
-    max-width: 700px;
+/*    max-width: 900px;
     margin: 0 auto;
-    padding: 100px 50px;
+    padding: 100px 50px;*/
     text-align: center;
 }
 
@@ -50,6 +50,7 @@ button:focus {
 
 #recording-instructions {
     margin: 15px auto 60px;
+    font-size: 24px;
 }
 
 #notes {
@@ -72,6 +73,30 @@ button:focus {
     margin-bottom: 40px;
 }
 
+.subject {
+    border-radius: 15%;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    margin: 1em;
+}
+#subjects {
+    list-style: disc;
+    list-style-position: inside;
+    font-size: 20px;
+    padding-left: 5em;
+    color:#010a79; 
+}
+.sentiment {
+    border-radius: 50%;
+    border: 1px solid #000;
+    margin: 1em;
+}
+
+#result-sentiment{
+    font-weight: bold;
+    margin-top: 25%; 
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 50px 25px;
@@ -82,11 +107,3 @@ button:focus {
     }
 
 }   
-
-
-
-/* -- Demo ads -- */
-
-@media (max-width: 1200px) {
-    #bsaHolder{ display:none;}
-}
